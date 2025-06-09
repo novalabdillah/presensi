@@ -2,282 +2,256 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Sistem Naskah Dinas Elektronik (SINDE)</title>
-  <link rel="icon" type="image/png" href="Lambang.png" />
+  <title>Presensi Siswa</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <head>
+  
+  <!-- Style utama kamu -->
   <style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(to right, #cbe9ff, #f0f9ff);
-    color: #333;
-    text-align: center;
-    padding: 20px;
-  }
-  .header {
-    margin-bottom: 20px;
-    position: relative;
-  }
-  .header h1 {
-    margin: 0;
-    color: #007BFF;
-    font-weight: bold;
-  }
-  .header p {
-    margin: 5px 0;
-    font-size: 14px;
-    color: #555;
-  }
-  .login-button {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-  }
-  .container {
-    max-width: 500px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-  td {
-    padding: 10px;
-    text-align: left;
-  }
-  .label {
-    font-weight: bold;
-    width: 35%;
-  }
-  .separator {
-    width: 5%;
-    text-align: center;
-    font-weight: bold;
-  }
-  .value {
-    width: 60%;
-  }
-  tr:nth-child(odd) { background-color: #ffffff; }
-  tr:nth-child(even) { background-color: #e0f0ff; }
-  .download-btn {
-    background: #007BFF;
-    color: white;
-    padding: 12px 18px;
-    border: none;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: 0.3s;
-    margin-top: 20px;
-  }
-  .download-btn:hover {
-    background: #0056b3;
-    transform: scale(1.05);
-  }
-  .not-found {
-    color: #dc3545;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  /* Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 300px;
-    border-radius: 10px;
-    text-align: left;
-  }
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .login-box {
-  width: 350px;
-  padding: 30px 25px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.3s ease;
-    }
-    
-    .login-input {
-      width: 100%;
-      padding: 10px 12px;
-      margin: 8px 0 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    body, table {
+      font-family: 'Poppins', sans-serif;
       font-size: 14px;
-      transition: border-color 0.3s;
+      color: #333;
     }
-    
-    .login-input:focus {
-      border-color: #007BFF;
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
-    }
-    
-    .login-btn {
-      width: 100%;
-      background-color: #007BFF;
-      color: white;
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    
-    .login-btn:hover {
-      background-color: #0056b3;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-.login-input {
-  width: 100%;
-  padding: 10px 12px;
-  margin: 8px 0 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.3s;
-  box-sizing: border-box; /* ✅ Ini mencegah input overflow */
-}
-* {
-  box-sizing: border-box;
-}
 
+    thead th {
+      background-color: #007bff !important;
+      color: white !important;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      padding-top: 16px !important;
+      padding-bottom: 16px !important;
+    }
+
+    tbody td {
+      font-size: 14px;
+      vertical-align: middle;
+      text-align: center;
+      padding: 4px;
+    }
+
+    tbody td:nth-child(2) {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #e9f2fb;
+    }
+
+    tbody tr:hover {
+      background-color: #d0e7fb;
+    }
   </style>
+
+  <!-- Tambahkan style responsive override di sini -->
+  <style>
+    @media (max-width: 768px) {
+      #tabelSiswa tbody td {
+        text-align: left !important;
+      }
+    }
+
+    table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before {
+      left: 8px;
+    }
+
+    table.dataTable.dtr-inline.collapsed tbody tr td {
+      text-align: left !important;
+    }
+  </style>
+
 </head>
 <body>
+  <div class="container mt-5">
+    <h2>Daftar Presensi Siswa</h2>
+    <table id="tabelSiswa" class="table table-striped dt-responsive nowrap" style="width:100%; font-family: 'Poppins', sans-serif;">
+      <thead>
+        <tr style="text-align: center;">
+          <th style="text-align: center;">Kelas</th>
+          <th style="text-align: center;">Nama Siswa</th>
+          <th style="text-align: center;">NISN</th>
+          <th style="text-align: center;">WhatsApp</th>
+          <th style="text-align: center;">Keterangan</th>
+          <th style="text-align: center;">Kirim Presensi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data akan diisi lewat JavaScript -->
+      </tbody>
+    </table>
+    
+    <style>
+      #tabelSiswa tbody td {
+        text-align: center;
+      }
+    
+      #tabelSiswa tbody td:nth-child(2) {
+        text-align: left;
+      }
+    </style>
 
-  <div class="header">
-    <button class="login-button" onclick="document.getElementById('loginModal').style.display='block'">Login Admin</button>
-    <img src="Lambang.png" alt="Logo Sekolah" style="height: 100px;">
-    <h1>SD NEGERI 1 TAMANSARI</h1>
-    <p>Jl. Cemara No. 27 Tamansari, Kecamatan Sumbermalang</p>
+
   </div>
-  <!-- Input Pencarian Nomor Surat -->
-    <div style="max-width: 500px; margin: 20px auto;">
-      <input type="text" id="searchNoSurat" placeholder="Masukkan Nomor Surat" class="login-input">
-      <button onclick="cariSurat()" class="login-btn" style="margin-top: 0; padding: 8px 12px; font-size: 14px;">Cari Surat</button>
-    </div>
-  <div class="container" id="hasil" style="display: none;"></div>
 
-  <!-- Modal Login -->
-    <div id="loginModal" class="modal">
-      <div class="modal-content login-box">
-        <span class="close" onclick="document.getElementById('loginModal').style.display='none'">&times;</span>
-        <h2 style="text-align: center; color: #007BFF; margin-bottom: 20px;">🔒 Login Admin</h2>
-        
-        <label for="username" style="font-weight: 600;">Username</label>
-        <input type="text" id="username" placeholder="Masukkan username" class="login-input">
-    
-        <label for="password" style="font-weight: 600;">Password</label>
-        <input type="password" id="password" placeholder="Masukkan password" class="login-input">
-        
-        <button onclick="login()" class="login-btn">Masuk</button>
-        
-        <p id="loginError" class="not-found" style="display: none;">❌ Username atau password salah</p>
-      </div>
-    </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const noSurat = params.get("no_surat");
-    
-      if (noSurat) {
-  const hasil = document.getElementById("hasil");
-  hasil.style.display = "block"; // ✅ tampilkan container hasil
-  hasil.innerHTML = "<p>🔄 Memuat data...</p>";
+  <script>
+    const SPREADSHEET_URL = "https://script.google.com/macros/s/AKfycbxo2QznppuX3wKEmg2bZPwIs-ZduWmQmD2wsvUeNqq1b40dzU9EiyEdbe2Mw-bwMpti/exec";
 
-  fetch("https://docs.google.com/spreadsheets/d/1qzOUHMPL8Tn9dUKtLox97U_G37eJ0SQc8nJW0SOikI8/gviz/tq?tqx=out:json")
-    .then(res => res.text())
-    .then(text => {
-      const json = JSON.parse(text.substring(47).slice(0, -2));
-      const rows = json.table.rows;
-      const data = rows.map(row => row.c.map(cell => cell ? cell.v : ""));
-
-      const found = data.find(row => row[1] === noSurat);
-
-      if (found) {
-        const html = `
-          <h2>Detail Surat</h2>
-          <table>
-            <tr><td class="label">No. Surat</td><td class="separator">:</td><td class="value">${found[1]}</td></tr>
-            <tr><td class="label">Tanggal</td><td class="separator">:</td><td class="value">${found[2]}</td></tr>
-            <tr><td class="label">Penandatangan</td><td class="separator">:</td><td class="value">${found[3]}</td></tr>
-            <tr><td class="label">Jabatan</td><td class="separator">:</td><td class="value">${found[4]}</td></tr>
-            <tr><td class="label">Perihal</td><td class="separator">:</td><td class="value">${found[5]}</td></tr>
-            <tr><td class="label">Unit Kerja</td><td class="separator">:</td><td class="value">${found[6]}</td></tr>
-          </table>
-          <a class="download-btn" href="${found[7]}" target="_blank">⬇️ Unduh Surat (PDF)</a>
-        `;
-        hasil.innerHTML = html;
-      } else {
-        hasil.innerHTML = '<p class="not-found">❌ No. Surat tidak terdaftar dalam sistem.</p>';
+    // Tampilkan loading popup
+    Swal.fire({
+      title: 'Memuat data...',
+      text: 'Silakan tunggu sebentar.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
       }
-    })
-    .catch(err => {
-      hasil.innerHTML = '<p class="not-found">⚠️ Gagal mengambil data. Pastikan spreadsheet dapat diakses publik.</p>';
-      console.error(err);
     });
-  } else {
-        // Tidak menampilkan apa-apa di #hasil jika tidak ada pencarian
-        document.getElementById("hasil").innerHTML = "";
-      }
     
-      function login() {
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+    fetch(SPREADSHEET_URL)
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = $('#tabelSiswa tbody');
+        data.forEach((row, index) => {
+          const keteranganOptions = `
+            <select class="form-select form-select-sm" id="keterangan-${index}">
+              <option value="Pilih keterangan">Pilih keterangan</option>
+              <option value="Hadir">Hadir</option>
+              <option value="Sakit">Sakit</option>
+              <option value="Ijin">Ijin</option>
+              <option value="Alpa">Alpa</option>
+            </select>
+          `;
     
-        if (username === "admin" && password === "sdn1Tamansari") {
-          window.location.href = "datasurat.html";
-        } else {
-          document.getElementById("loginError").style.display = "block";
-        }
-      }
+          const btnPresensi = `
+            <button class="btn btn-sm btn-success" onclick="kirimPresensi(${index}, '${row.Nama}', '${row.NISN}')">Kirim Presensi</button>
+          `;
     
-      function cariSurat() {
-        const input = document.getElementById("searchNoSurat").value.trim();
-        if (input) {
-          window.location.href = `?no_surat=${encodeURIComponent(input)}`;
-        } else {
-          alert("Silakan masukkan nomor surat untuk mencari.");
-        }
+          const rowHtml = `
+            <tr>
+              <td>${row.Kelas}</td>
+              <td>${row.Nama}</td>
+              <td>${row.NISN}</td>
+              <td>${row.WhatsApp}</td>
+              <td>${keteranganOptions}</td>
+              <td>${btnPresensi}</td>
+            </tr>
+          `;
+          tableBody.append(rowHtml);
+        });
+    
+        $('#tabelSiswa').DataTable({
+          responsive: true
+        });
+    
+        // Tutup loading dan tampilkan popup sukses
+        Swal.fire({
+          icon: 'success',
+          title: 'Data berhasil dimuat!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+      .catch(error => {
+        // Kalau gagal, tutup loading dan tampilkan error
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal memuat data!',
+          text: 'Terjadi kesalahan saat mengambil data.'
+        });
+        console.error('Error fetching data:', error);
+      });
+
+  </script>
+  
+  <script>
+  function kirimPresensi(index, nama, nisn) {
+    const keterangan = document.getElementById(`keterangan-${index}`).value;
+    const nomorWA = document.querySelector(`#tabelSiswa tbody tr:nth-child(${index + 1}) td:nth-child(4)`).innerText;
+
+    if (keterangan === "Pilih keterangan") {
+      Swal.fire({
+        icon: "warning",
+        title: "Keterangan belum dipilih!",
+        text: "Silakan pilih keterangan terlebih dahulu.",
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: "Yakin ingin mengirim presensi?",
+      html: `
+        <strong>${nama}</strong><br>
+        NISN: ${nisn}<br>
+        Keterangan: ${keterangan}
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Kirim",
+      cancelButtonText: "Batal"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const latitude = "-7.8653392";
+        const longitude = "113.698292";
+
+        fetch("https://script.google.com/macros/s/AKfycbxo2QznppuX3wKEmg2bZPwIs-ZduWmQmD2wsvUeNqq1b40dzU9EiyEdbe2Mw-bwMpti/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            sheet: "Data Harian",
+            data: {
+              nama,
+              nisn,
+              keterangan,
+              nomorWA,
+              latitude,
+              longitude
+            }
+          })
+        })
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        })
+        .then(result => {
+          if (result.success) {
+            Swal.fire({
+              icon: "success",
+              title: "Presensi berhasil dikirim!",
+              text: `${nama} - ${keterangan}`
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Gagal mengirim!",
+              text: result.message || "Terjadi kesalahan saat mengirim data."
+            });
+          }
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: "error",
+            title: "Gagal mengirim!",
+            text: "Koneksi gagal atau server tidak merespons. Pesan: " + err.message
+          });
+        });
       }
-    </script>
+    });
+  }
+</script>
 
 
 </body>
